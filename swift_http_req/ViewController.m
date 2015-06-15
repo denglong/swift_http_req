@@ -7,8 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "ResponseController.h"
 
-@interface ViewController ()
+@interface ViewController ()<ToolDelegate>
+{
+    ResponseController *client;
+}
 
 @end
 
@@ -16,12 +20,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    client = [ResponseController sharedManager];
+    client.delegate = self;
+    
+    NSString *url = @"http://api.map.baidu.com/place/v2/search";
+    NSDictionary *dic = @{@"q":@"宾馆", @"region":@"北京", @"output":@"json", @"ak":@"E4805d16520de693a3fe707cdc962045"};
+    
+    [client mothRequestPostUrl:url andDic:dic];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)responseDicSussecd:(NSDictionary *)response {
+    
 }
+
+- (void)responseDicFiled:(NSDictionary *)response {
+    
+}
+
 
 @end
