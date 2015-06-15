@@ -23,7 +23,7 @@
     client = [ResponseController sharedManager];
     client.delegate = self;
     
-    NSString *url = @"http://api.map.baidu.com/place/v2/search";
+    NSString *url = @"http://192.168.40.41/myTest/image.php";
     NSDictionary *dic = @{@"q":@"宾馆", @"region":@"北京", @"output":@"json", @"ak":@"E4805d16520de693a3fe707cdc962045"};
     
     [client mothRequestPostUrl:url andDic:dic];

@@ -76,15 +76,35 @@ class HttpClient:NSObject,NSURLConnectionDataDelegate{
     }
     
     func postDataDic(url:String, dic:NSDictionary) {
-        downloadFromPostUrl(url, dic: dic, completionHandler: {(data: NSData?, error: NSError?) -> Void in
+//        downloadFromPostUrl(url, dic: dic, completionHandler: {(data: NSData?, error: NSError?) -> Void in
+//            if (error != nil){
+//                println("error=\(error!.localizedDescription)")
+//            }else{
+//                var dict=NSJSONSerialization.JSONObjectWithData(data!, options:.MutableContainers, error:nil) as? NSDictionary
+//                //println("post_dict=\(dict)")
+//                self.delegate?.didResponse(dict!)
+//            }
+//        })
+        //post demo(带NSData)
+        //抱歉暂时没有测试地址，也没测试，谁有兴趣测测，有问题联系我：QQ913372952
+
+        contentType="png"
+        var image=UIImage(named:"2.png")
+        var data=UIImageJPEGRepresentation(image, 1.0)
+        var  dict=NSMutableDictionary()
+    
+        dict.setObject(data, forKey:"image")
+        dict.setObject("测试的图片", forKey:"decription")
+        downloadNSDataFromPostUrl(url,dic:dict,completionHandler: {(data: NSData?, error: NSError?) -> Void in
             if (error != nil){
                 println("error=\(error!.localizedDescription)")
+                
             }else{
-                var dict=NSJSONSerialization.JSONObjectWithData(data!, options:.MutableContainers, error:nil) as? NSDictionary
-                //println("post_dict=\(dict)")
-                self.delegate?.didResponse(dict!)
+                var json=NSJSONSerialization.JSONObjectWithData(data!, options:.MutableContainers, error:nil) as? NSDictionary
+                println("post_image_dict=\(json)")
             }
         })
+
     }
     
     //post 请求(dic里包含NSData)需要设置 contentType的类型
@@ -144,23 +164,23 @@ class HttpClient:NSObject,NSURLConnectionDataDelegate{
         self.completeBlock=completionHandler
     }
     //NSURLConnectionDataDelegate
-    func connection(connection: NSURLConnection!, didReceiveResponse response: NSURLResponse!){
+    func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse){
         var newResponse=response as! NSHTTPURLResponse
         println("statusCode=\(newResponse.statusCode)")
         
     }
     
-    func connection(connection: NSURLConnection!, didReceiveData data: NSData!){
+    func connection(connection: NSURLConnection, didReceiveData data: NSData){
         receiveData!.appendData(data)
     }
     
-    func connectionDidFinishLoading(connection: NSURLConnection!){
+    func connectionDidFinishLoading(connection: NSURLConnection){
         if (completeBlock != nil){
             completeBlock!(data:receiveData,error:nil)
         }
         
     }
-    func connection(connection: NSURLConnection!, didFailWithError error: NSError!){
+    func connection(connection: NSURLConnection, didFailWithError error: NSError){
         if (completeBlock != nil){
             completeBlock!(data:receiveData,error:error)
         }
