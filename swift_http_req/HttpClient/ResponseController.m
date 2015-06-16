@@ -39,6 +39,12 @@
     [request requestPostData:url dic:dic];
 }
 
+//带data的post请求
+- (void)mothRequestPostHabeDataUrl:(NSString *)url {
+    RequestController *request = [[RequestController alloc] init];
+    [request requestPostHaveData:url];
+}
+
 /**
  * Method name: getResponseList
  * Description: 获取并处理请求后返回值

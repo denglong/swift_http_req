@@ -76,23 +76,27 @@ class HttpClient:NSObject,NSURLConnectionDataDelegate{
     }
     
     func postDataDic(url:String, dic:NSDictionary) {
-//        downloadFromPostUrl(url, dic: dic, completionHandler: {(data: NSData?, error: NSError?) -> Void in
-//            if (error != nil){
-//                println("error=\(error!.localizedDescription)")
-//            }else{
-//                var dict=NSJSONSerialization.JSONObjectWithData(data!, options:.MutableContainers, error:nil) as? NSDictionary
-//                //println("post_dict=\(dict)")
-//                self.delegate?.didResponse(dict!)
-//            }
-//        })
+        downloadFromPostUrl(url, dic: dic, completionHandler: {(data: NSData?, error: NSError?) -> Void in
+            if (error != nil){
+                println("error=\(error!.localizedDescription)")
+            }else{
+                var dict=NSJSONSerialization.JSONObjectWithData(data!, options:.MutableContainers, error:nil) as? NSDictionary
+                //println("post_dict=\(dict)")
+                self.delegate?.didResponse(dict!)
+            }
+        })
+    }
+    
+    //post带data请求
+    func postHaveData(url:String) {
         //post demo(带NSData)
         //抱歉暂时没有测试地址，也没测试，谁有兴趣测测，有问题联系我：QQ913372952
-
+        
         contentType="png"
         var image=UIImage(named:"2.png")
         var data=UIImageJPEGRepresentation(image, 1.0)
         var  dict=NSMutableDictionary()
-    
+        
         dict.setObject(data, forKey:"image")
         dict.setObject("测试的图片", forKey:"decription")
         downloadNSDataFromPostUrl(url,dic:dict,completionHandler: {(data: NSData?, error: NSError?) -> Void in
@@ -102,9 +106,9 @@ class HttpClient:NSObject,NSURLConnectionDataDelegate{
             }else{
                 var json=NSJSONSerialization.JSONObjectWithData(data!, options:.MutableContainers, error:nil) as? NSDictionary
                 println("post_image_dict=\(json)")
+                self.delegate?.didResponse(json!)
             }
         })
-
     }
     
     //post 请求(dic里包含NSData)需要设置 contentType的类型
@@ -130,6 +134,7 @@ class HttpClient:NSObject,NSURLConnectionDataDelegate{
                 bodyString.appendFormat("\(dic[key as! NSString])\r\n")
             }
         }
+        
         //添加分界线，换行
         bodyString.appendFormat("\(start)\r\n")
         

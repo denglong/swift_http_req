@@ -14,18 +14,29 @@ class RequestController: UIViewController, ToolProtocol {
         super.viewDidLoad()
     }
     
-    func requestGetData(url:NSString) {
+    //get请求代理实现
+    func requestGetData(url:String) {
         var dl = HttpClient()
         dl.delegate = self
-        dl.getDataDic(url as String)
+        dl.getDataDic(url)
     }
     
-    func requestPostData(url:NSString, dic:NSDictionary) {
+    //post不带data请求代理实现
+    func requestPostData(url:String, dic:NSDictionary) {
         var dl=HttpClient()
         dl.delegate = self
-        dl.postDataDic(url as String, dic: dic)
+        dl.postDataDic(url, dic: dic)
+    }
+    
+    //post带data请求代理实现
+    func requestPostHaveData(url:String) {
+        var dl=HttpClient()
+        dl.delegate = self
+        dl.postHaveData(url)
+        
     }
 
+    //实现httpClient中得代理，成功调用此方法
     func didResponse(dict: NSDictionary) {
         var response = ResponseController.sharedManager()
         response.getResponseList(dict as [NSObject : AnyObject])

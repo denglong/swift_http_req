@@ -23,5 +23,6 @@
 - (void)getResponseList:(NSDictionary *)dict;
 - (void)mothRequestUrl:(NSString *)url;
 - (void)mothRequestPostUrl:(NSString *)url andDic:(NSDictionary *)dic;
+- (void)mothRequestPostHabeDataUrl:(NSString *)url;
 
 @end

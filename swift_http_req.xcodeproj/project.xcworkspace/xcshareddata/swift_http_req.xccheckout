@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>369F73D1-02D3-4225-B9E6-14B49F76CCF0</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>swift_http_req</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>04CE627E3B168FAD2C9469E39741B027001EC104</key>
 		<string>https://github.com/denglong/swift_http_req.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>swift_http_req.xcodeproj/project.xcworkspace</string>
+	<string>swift_http_req.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>04CE627E3B168FAD2C9469E39741B027001EC104</key>
